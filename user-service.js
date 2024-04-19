@@ -1,5 +1,5 @@
 const http = require('http');
-const url = require('url')
+const url = require('url');
 
 const users = ['Aras', 'Arsy', 'Dimas', 'Ivan', 'Rafy', 'Gilang'];
 const MISSING = 4;
@@ -10,19 +10,17 @@ const server = http.createServer((req, res) => {
   let id = pathname.match(/^\/(\d+)$/);
   if (!id) {
     res.statusCode = 400;
-    return void res.end()
+    return void res.end();
   }
 
-  console.log(id, 'user')
-
-  id = Number(id)[1]
+  id = Number(id[1]);
 
   if (id === MISSING) {
     res.statusCode = 404;
-    return void res.end()
+    return void res.end();
   }
 
-  res.setHeader('Content-Type', 'application/json')
+  res.setHeader('Content-Type', 'application/json');
 
   res.end(JSON.stringify({
     id,

@@ -3,8 +3,8 @@ const got = require('got');
 
 const {
   ORDER_SERVICE_PORT = 8001,
-  USER_SERVICE_PORT = 8002
-} = process.env
+  USER_SERVICE_PORT = 8002,
+} = process.env;
 
 const orderService = `http://localhost:${ORDER_SERVICE_PORT}`;
 const userService = `http://localhost:${USER_SERVICE_PORT}`;
@@ -25,14 +25,14 @@ const init = async () => {
         try {
           const [order, user] = await Promise.all([
             got(`${orderService}/${id}`).json(),
-            got(`${userService}/${id}`).json()
-          ])
+            got(`${userService}/${id}`).json(),
+          ]);
 
           return {
             id: order.id,
             menu: order.menu,
-            user: user.name
-          }
+            user: user.name,
+          };
         } catch (error) {
           if (!error.response) throw error;
           if (error.response.statusCode === 400) {
@@ -41,12 +41,12 @@ const init = async () => {
           if (error.response.statusCode === 404) {
             return h.response({ message: 'not found' }).code(404);
           }
- 
+
           throw error;
         }
-      }
-    }
-  ])
+      },
+    },
+  ]);
 
   server.start();
   console.log(`Server berjalan pada ${server.info.uri}`);

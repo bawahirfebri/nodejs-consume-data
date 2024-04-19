@@ -10,14 +10,12 @@ const server = http.createServer((req, res) => {
   let id = pathname.match(/^\/(\d+)$/);
   if (!id) {
     res.statusCode = 400;
-    return void res.end()
-  };
+    return void res.end();
+  }
 
-  console.log(id, 'order')
+  id = Number(id[1]);
 
-  id = Number(id[1])
-
-  if(id === MISSING) {
+  if (id === MISSING) {
     res.statusCode = 404;
     return void res.end();
   }
@@ -32,5 +30,5 @@ const server = http.createServer((req, res) => {
 
 server.listen(process.env.PORT || 0, () => {
   const { port } = server.address();
-  console.log(`Order service listening on localhost on port: ${port}`)
+  console.log(`Order service listening on localhost on port: ${port}`);
 });
